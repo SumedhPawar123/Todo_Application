@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
     res.send("Application is Working")
 })
 
-app.use("/auth/api", authRoute)
+app.use("/api/auth", authRoute)
 
 
 const PORT = process.env.PORT
