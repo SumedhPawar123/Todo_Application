@@ -44,5 +44,5 @@ exports.login = async(req, res) => {
         expiresIn: "1d"
     } )
 
-    res.status(201).json({userExist, token})
+    res.status(201).json({user: userExist, token})
 }

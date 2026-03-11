@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const connectDB = require("./config/db")
 const authRoute = require("./routes/authRoute")
+const taskRoute = require("./routes/taskRoute")
 
 // Middlware 
 app.use(express.json());
@@ -21,7 +22,8 @@ app.get("/", (req, res) => {
     res.send("Application is Working")
 })
 
-app.use("/api/auth", authRoute)
+app.use("/api/auth", authRoute)  //Auth Route
+app.use("/api", taskRoute)  
 
 
 const PORT = process.env.PORT
