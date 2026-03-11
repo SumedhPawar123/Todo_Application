@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 
 
+// Register Controller
 exports.register = async (req, res) => {
     const {name, email, password, role} = req.body;
 
@@ -24,6 +25,7 @@ exports.register = async (req, res) => {
     res.status(201).json({message: "User Register Successfully"})
 }
 
+// Login Controller
 exports.login = async(req, res) => {
     const {email, password} = req.body;
 
