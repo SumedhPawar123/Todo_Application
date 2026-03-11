@@ -40,7 +40,7 @@ exports.login = async(req, res) => {
         res.status(404).json({message: "Invalid Creadential"});
     }
 
-    const token = jwt.sign({id: userExist._id }, process.env.SECRET_JWT, {
+    const token = jwt.sign({id: userExist._id }, process.env.JWT_SECRET, {
         expiresIn: "1d"
     } )
 
