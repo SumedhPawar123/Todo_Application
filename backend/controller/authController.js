@@ -1,16 +1,17 @@
 const User = require("../models/Auth");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+
 
 
 // Register Controller
 exports.register = async (req, res) => {
-    const {name, email, password, role} = req.body;
+    const { name, email, password, role } = req.body;
 
-    const userExist = await User.findOne({email});
+    const userExist = await User.findOne({ email });
 
-    if(userExist){
-        res.status(400).json({message: "User Already Exist"});
+    if (userExist) {
+        res.status(400).json({ message: "User Already Exist" });
     }
 
     const hashpassword = await bcrypt.hash(password, 10);
@@ -22,27 +23,29 @@ exports.register = async (req, res) => {
         role: role
     })
 
-    res.status(201).json({message: "User Register Successfully"})
+    res.status(201).json({ message: "User Register Successfully" })
 }
 
 // Login Controller
-exports.login = async(req, res) => {
-    const {email, password} = req.body;
+exports.login = async (req, res) => {
+    const { email, password } = req.body;
 
-    const userExist = await User.findOne({email});
-    if(!userExist){
-        res.status(400).json({message: "Invalid Credential"});
+    const userExist = await User.findOne({ email });
+    if (!userExist) {
+        res.status(400).json({ message: "Invalid Credential" });
     }
 
     const isMatch = await bcrypt.compare(password, userExist.password);
 
-    if(!isMatch){
-        res.status(404).json({message: "Invalid Creadential"});
+    if (!isMatch) {
+        res.status(404).json({ message: "Invalid Creadential" });
     }
 
-    const token = jwt.sign({id: userExist._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: userExist._id }, process.env.JWT_SECRET, {
         expiresIn: "1d"
-    } )
+    })
 
-    res.status(201).json({user: userExist, token})
+    
+
+    res.status(201).json({ user: userExist, token })
 }

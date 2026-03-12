@@ -4,13 +4,16 @@ const dotenv = require("dotenv");
 const app = express();
 const cors = require("cors");
 const connectDB = require("./config/db")
+const cookieParser = require("cookie-parser")
+
 const authRoute = require("./routes/authRoute")
 const taskRoute = require("./routes/taskRoute")
 
 // Middlware 
+dotenv.config();
 app.use(express.json());
 app.use(cors());
-dotenv.config();
+app.use(cookieParser())
 
 
 // Database Connection
